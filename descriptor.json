@@ -5,7 +5,7 @@
     "image": "mizjaggy18/s_celldetect_stardist",
     "type": "singularity"
   },
-  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [CYTOMINE_ID_CELL_TERM] [STARDIST_PROB_T] [STARDIST_NMS_T] [STARDIST_NORM_PERC_LOW] [STARDIST_NORM_PERC_HIGH] [STARDIST_MODEL] [CYTOMINE_AREA_TH]",
+  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [CYTOMINE_ID_CELL_TERM] [STARDIST_PROB_T] [STARDIST_NMS_T] [STARDIST_NORM_PERC_LOW] [STARDIST_NORM_PERC_HIGH] [STARDIST_MODEL] [CYTOMINE_AREA_TH] [CYTOMINE_IMG_TH]",
   "inputs": [
     {
       "id": "cytomine_host",
@@ -154,6 +154,17 @@
       "name": "Threshold set nucleus area (size)",
       "description": "A typical diameter of the cancer nucleus would be 12 to 18 microns. Taking the smallest diameter and assuming an ellipse with 12 microns semi-major axis and 6 microns semi-minor axis, an area of 56.5 micron2 is obtained. It is safe to assume a complete nucleus should at least of this size.",
       "default-value": 10,
+      "set-by-server": false,
+      "optional": false,
+      "type": "Number"
+    },
+    {
+      "id": "cytomine_img_th",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Image threshold value for model (2)",
+      "description": "Image threshold value after performing blurring using Gaussian filter. Only for model 2 (Fluo PR)",
+      "default-value": 0.8,
       "set-by-server": false,
       "optional": false,
       "type": "Number"
