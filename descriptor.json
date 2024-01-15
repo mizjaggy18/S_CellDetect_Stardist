@@ -1,0 +1,164 @@
+{
+  "name": "S_CellDetect_Stardist",
+  "description": "Segmentation of nuclei using Stardist for various models",
+  "container-image": {
+    "image": "mizjaggy18/s_celldetect_stardist",
+    "type": "singularity"
+  },
+  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [CYTOMINE_ID_CELL_TERM] [STARDIST_PROB_T] [STARDIST_NMS_T] [STARDIST_NORM_PERC_LOW] [STARDIST_NORM_PERC_HIGH] [STARDIST_MODEL] [CYTOMINE_AREA_TH]",
+  "inputs": [
+    {
+      "id": "cytomine_host",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine host",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_public_key",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine public key",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_private_key",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine private key",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_id_project",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine project ID",
+      "set-by-server": true,
+      "optional": false,
+      "type": "Number"
+    },
+    {
+      "id": "cytomine_id_software",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine software ID",
+      "set-by-server": true,
+      "optional": false,
+      "type": "Number"
+    },
+    {
+      "id": "cytomine_id_images",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine Image IDs",
+      "description": "Images on which to classify objects",
+      "optional": false,
+      "type": "ListDomain",
+      "uri": "/api/project/$currentProject$/imageinstance.json",
+      "uri-print-attribute": "instanceFilename",
+      "uri-sort-attribute": "created"
+    },
+
+	{
+	    "id": "cytomine_id_roi_term",
+	    "value-key": "[@ID]",
+	    "command-line-flag": "--@id",
+	    "name": "Cytomine ROI term ID",
+	    "description": "Ontology term ID for ROI(s) where to detect cells",
+	    "set-by-server": false,
+	    "optional": false,
+	    "type": "Domain",
+	    "uri": "/api/ontology/$currentOntology$/term.json",
+	    "uri-print-attribute": "name",
+	    "uri-sort-attribute": "name"
+	},
+
+	{
+	    "id": "cytomine_id_cell_term",
+	    "value-key": "[@ID]",
+	    "command-line-flag": "--@id",
+	    "name": "Cytomine Cell term ID",
+	    "description": "Ontology term ID for Cell to be detected",
+	    "set-by-server": false,
+	    "optional": false,
+	    "type": "Domain",
+	    "uri": "/api/ontology/$currentOntology$/term.json",
+	    "uri-print-attribute": "name",
+	    "uri-sort-attribute": "name"
+	},
+  {
+    "id": "stardist_model",
+    "value-key": "[@ID]",
+    "command-line-flag": "--@id",
+    "name": "Stardist Model: HE (for ER) or Fluo (for PR) or SISH",
+    "description": "1: HE (ER), 2: Fluo (PR), 3: Fluo (SISH)",
+    "default-value": 1,
+    "set-by-server": false,
+    "optional": false,
+    "type": "Number"
+  },
+	{
+	    "id": "stardist_prob_t",
+	    "value-key": "[@ID]",
+	    "command-line-flag": "--@id",
+	    "name": "Stardist Probability Threshold",
+	    "description": "Probability Threshold in range [0.0, 1.0] - higher values lead to fewer segmented objects, but will likely avoid false positives",
+	    "default-value": 0.5,
+	    "set-by-server": false,
+	    "optional": true,
+	    "type": "Number"
+	},
+	{
+	    "id": "stardist_nms_t",
+	    "value-key": "[@ID]",
+	    "command-line-flag": "--@id",
+	    "name": "Stardist Non-Maximum Suppression Overlap threshold",
+	    "description": "Overlap Threshold in range [0.0, 1.0] - higher values allow segmented objects to overlap substantially.",
+	    "default-value": 0.5,
+	    "set-by-server": false,
+	    "optional": true,
+	    "type": "Number"
+	},
+	{
+	    "id": "stardist_norm_perc_low",
+	    "value-key": "[@ID]",
+	    "command-line-flag": "--@id",
+	    "name": "Stardist Image Normalization Percentile Low",
+	    "description": "Percentile low in range [0.0 100.0]",
+	    "default-value": 1,
+	    "set-by-server": false,
+	    "optional": true,
+	    "type": "Number"
+	},
+	{
+	    "id": "stardist_norm_perc_high",
+	    "value-key": "[@ID]",
+	    "command-line-flag": "--@id",
+	    "name": "Stardist Image Normalization Percentile High",
+	    "description": "Percentile high in range [0.0 100.0]",
+	    "default-value": 99.8,
+	    "set-by-server": false,
+	    "optional": true,
+	    "type": "Number"
+	},
+    {
+      "id": "cytomine_area_th",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Threshold set nucleus area (size)",
+      "description": "A typical diameter of the cancer nucleus would be 12 to 18 microns. Taking the smallest diameter and assuming an ellipse with 12 microns semi-major axis and 6 microns semi-minor axis, an area of 56.5 micron2 is obtained. It is safe to assume a complete nucleus should at least of this size.",
+      "default-value": 10,
+      "set-by-server": false,
+      "optional": false,
+      "type": "Number"
+    }
+  ],
+
+  "schema-version": "cytomine-0.1"
+}
