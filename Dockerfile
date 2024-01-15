@@ -32,8 +32,8 @@ RUN pip3 install numpy==1.22.*
 RUN pip3 install shapely
 RUN pip3 install tifffile
 
-RUN cd /models && \
-    mkdir -p 2D_versatile_HE
+WORKDIR /models
+RUN mkdir -p 2D_versatile_HE
 ADD /models/2D_versatile_HE/config.json /models/2D_versatile_HE/config.json
 ADD /models/2D_versatile_HE/thresholds.json /models/2D_versatile_HE/thresholds.json
 ADD /models/2D_versatile_HE/weights_best.h5 /models/2D_versatile_HE/weights_best.h5
@@ -41,8 +41,8 @@ RUN chmod 444 /models/2D_versatile_HE/config.json
 RUN chmod 444 /models/2D_versatile_HE/thresholds.json
 RUN chmod 444 /models/2D_versatile_HE/weights_best.h5
 
-RUN cd /models && \
-    mkdir -p 2D_versatile_fluo
+WORKDIR /models
+RUN mkdir -p 2D_versatile_fluo
 ADD /models/2D_versatile_fluo/config.json /models/2D_versatile_fluo/config.json
 ADD /models/2D_versatile_fluo/thresholds.json /models/2D_versatile_fluo/thresholds.json
 ADD /models/2D_versatile_fluo/weights_best.h5 /models/2D_versatile_fluo/weights_best.h5
@@ -50,8 +50,8 @@ RUN chmod 444 /models/2D_versatile_fluo/config.json
 RUN chmod 444 /models/2D_versatile_fluo/thresholds.json
 RUN chmod 444 /models/2D_versatile_fluo/weights_best.h5
 
-RUN cd /models && \
-    mkdir -p 2D_versatile_fluo_sish
+WORKDIR /models
+RUN mkdir -p 2D_versatile_fluo_sish
 ADD /models/2D_versatile_fluo_sish/config.json /models/2D_versatile_fluo_sish/config.json
 ADD /models/2D_versatile_fluo_sish/thresholds.json /models/2D_versatile_fluo_sish/thresholds.json
 ADD /models/2D_versatile_fluo_sish/weights_best.h5 /models/2D_versatile_fluo_sish/weights_best.h5
