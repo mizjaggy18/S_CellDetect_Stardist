@@ -62,7 +62,7 @@ def run(cyto_job, parameters):
     user = job.userJob
     project = cyto_job.project
     # roi_type=parameters.cytomine_roi_type
-    # modeltype=parameters.cytomine_model
+    img_th=parameters.cytomine_img_th
     area_th=parameters.cytomine_area_th
     stardist_model=parameters.stardist_model
 
@@ -168,7 +168,7 @@ def run(cyto_job, parameters):
                             #Preprocessing for PR-IHC
                             X2=X[x]
                             blurred_image = filters.gaussian(color.rgb2gray(X2), sigma=1.0)      
-                            mask = blurred_image > 0.8  # Adjust the threshold as needed                            
+                            mask = blurred_image > img_th #0.8  # Adjust the threshold as needed                            
                             # Use the mask to remove the background
                             X2[mask] = [255, 255, 255]  # Set background pixels to black (0, 0, 0)                            
                             X1=255 - X2[:,:,1]
